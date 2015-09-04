@@ -1,0 +1,9 @@
+{
+  "name": "apidocs",
+  "version": "1.0.0",
+  "dependencies": {
+    "stag": "git+https://github.com/matejc/stag.git#master",
+    "swagger-enhance": "^0.1.1"
+  },
+  "description": "apidocs"
+}
