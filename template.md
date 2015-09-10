@@ -11,14 +11,11 @@ search: true
 ---
 
 {% include "includes/macros.md" %}
+{% include "content.md" %}
 
 # Introduction
 
-Welcome to the Kittn API! You can use our API to access Kittn API endpoints, which can get information on various cats, kittens, and breeds in our database.
-
-We have language bindings in Shell, Ruby, and Python! You can view code examples in the dark area to the right, and you can switch the programming language of the examples with the tabs in the top right.
-
-This example API documentation page was created with [Slate](http://github.com/tripit/slate). Feel free to edit it and use it as a base for your own API's documentation.
+{{ introduction() }}
 
 {% for api in apis %}
 
@@ -29,9 +26,9 @@ This example API documentation page was created with [Slate](http://github.com/t
 {% for modelName, model in api.models %}
 ### {{ modelName }}
 
-Property | Type
--------- | ----
-{% for propertyName, property in model.properties %}{{ propertyName }} | {{ property.type }}
+Property | Type | Description
+-------- | ---- | -----------
+{% for propertyName, property in model.properties %}{{ propertyName }} | {{ property.type }} | {{ modelDescription(modelName, propertyName) }}
 {% endfor %}
 {% endfor %}
 
@@ -40,27 +37,31 @@ Property | Type
 {% for item in api.apis %}
 ## {{ item.path }}
 
+{{ pathDescription(item.path) }}
+
 {% for operation in item.operations %}
 
-### Description
-
-{{ operation.summary }}
-
-### HTTP Request
-
-`{{ operation.method }} {{ api.basePath }}{{ item.path }}`
-
-### Query Parameters
-
-Parameter | Type | Description
---------- | ---- | -----------
-{% for parameter in operation.parameters %}{{ parameter.name }} | {{ parameter.type }} | {{ parameter.description }}
-{% endfor %}
+### {{ operation.method }}
 
 ```shell
 {{ curl(api.basePath + item.path, operation) }}
 
 ```
+
+{{ operation.summary }}
+
+#### HTTP Request
+
+`{{ operation.method }} {{ api.basePath }}{{ item.path }}`
+
+{{ methodDescription(item.path, operation.method) }}
+
+#### Query Parameters
+
+Parameter | Type | Description
+--------- | ---- | -----------
+{% for parameter in operation.parameters %}{{ parameter.name }} | {{ parameter.type }} | {{ parameter.description }}
+{% endfor %}
 
 {% endfor %}
 

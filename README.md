@@ -15,6 +15,9 @@ This project combines Stag and Slate to autogenerate documentation for Swagger.
 
 ## Usage example
 
+Modify `content.md` for introduction and description strings.
+
+
 apidocs for Loopback
 
     stag http://localhost:3000/explorer/resources template.md ./slate/source/index.md
