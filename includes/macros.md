@@ -23,7 +23,7 @@
 
 {% macro curl(path, operation) -%}
 
-curl "{{path}}{{ queryParameters(operation) }}" \
+curl "{{path}}{{ queryParameters(operation) }}" -X {{operation.method}} \
   -H "Cookie: token=<token>" {{ bodyParameters(operation) }}
 
 {%- endmacro %}
