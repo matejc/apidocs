@@ -3,6 +3,7 @@ title: API Reference
 
 language_tabs:
   - shell
+  - json
 
 toc_footers:
   - <a href='http://github.com/tripit/slate'>Documentation Powered by Slate</a>
@@ -26,9 +27,11 @@ search: true
 {% for modelName, model in api.models %}
 ### {{ modelName }}
 
+{{ modelDescription(modelName) }}
+
 Property | Type | Description
 -------- | ---- | -----------
-{% for propertyName, property in model.properties %}{{ propertyName }} | {{ property.type }} | {{ modelDescription(modelName, propertyName) }}
+{% for propertyName, property in model.properties %}{{ propertyName }} | {{ property.type }} | {{ modelPropertyDescription(modelName, propertyName) }}
 {% endfor %}
 {% endfor %}
 
